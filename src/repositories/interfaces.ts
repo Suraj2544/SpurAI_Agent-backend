@@ -5,6 +5,7 @@ export interface IConversationRepository {
   createConversation(): Promise<IConversation>;
   getConversationById(id: string): Promise<IConversation | null>;
   findAllActive(): Promise<IConversation[]>;
+  deleteConversation(id: string): Promise<boolean>;
 }
 
 export interface IMessageRepository {
@@ -18,4 +19,5 @@ export interface IMessageRepository {
     limit?: number,
     beforeDate?: Date
   ): Promise<IMessage[]>;
+  deleteMessagesByConversationId(conversationId: string): Promise<void>;
 }

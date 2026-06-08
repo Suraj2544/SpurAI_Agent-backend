@@ -30,6 +30,10 @@ export class MessageRepository implements IMessageRepository {
       .limit(limit)
       .exec();
   }
+
+  async deleteMessagesByConversationId(conversationId: string): Promise<void> {
+    await Message.deleteMany({ conversationId }).exec();
+  }
 }
 
 export default MessageRepository;

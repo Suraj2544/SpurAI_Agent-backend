@@ -71,6 +71,27 @@ export class ConversationController {
       next(error);
     }
   };
+
+  deleteConversation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { conversationId } = req.params;
+
+      // Delete associated messages first
+      await this.messageRepo.deleteMessagesByConversationId(conversationId);
+
+      // Delete the conversation document
+      const deleted = await this.conversationRepo.deleteConversation(conversationId);
+
+      if (!deleted) {
+        res.status(404).json({ error: 'Conversation not found' });
+        return;
+      }
+
+      res.status(200).json({ message: 'Conversation and all associated messages successfully deleted.' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default ConversationController;

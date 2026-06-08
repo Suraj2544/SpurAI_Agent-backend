@@ -16,6 +16,11 @@ export class ConversationRepository implements IConversationRepository {
       .sort({ updatedAt: -1 })
       .exec();
   }
+
+  async deleteConversation(id: string): Promise<boolean> {
+    const result = await Conversation.deleteOne({ _id: id }).exec();
+    return result.deletedCount > 0;
+  }
 }
 
 export default ConversationRepository;

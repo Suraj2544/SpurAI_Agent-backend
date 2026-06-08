@@ -16,5 +16,6 @@ router.get('/active', conversationController.getActiveConversations);
 router.put('/:conversationId/status', conversationController.updateStatus);
 router.put('/:conversationId/assign', conversationController.assignAgent);
 router.get('/:conversationId/messages', conversationController.getMessages);
+router.delete('/:conversationId', conversationController.deleteConversation);
 
 export default router;
